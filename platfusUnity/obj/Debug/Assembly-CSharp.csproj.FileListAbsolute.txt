@@ -1,0 +1,2 @@
+/Users/hubertkordacz/workspace/unityspace/platfus/platfusUnity/obj/Debug/Assembly-CSharp.csprojResolveAssemblyReference.cache
+/Users/hubertkordacz/workspace/unityspace/platfus/platfusUnity/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache
