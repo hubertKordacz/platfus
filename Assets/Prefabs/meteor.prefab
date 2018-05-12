@@ -129,6 +129,8 @@ MonoBehaviour:
   explosionRadius: 5
   explosionForce: 750
   massOnGrounded: 1
+  particleOnGrounded: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3,
+    type: 2}
 --- !u!119 &119465495675769916
 Projector:
   m_ObjectHideFlags: 1
