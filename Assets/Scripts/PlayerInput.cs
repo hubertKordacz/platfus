@@ -29,8 +29,8 @@ public class PlayerInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log("Axis " + GetAxis(InputActions.Vertical));
-        Debug.Log("Attack " + GetButton(InputActions.Attack));
+        //Debug.Log("Axis " + GetAxis(InputActions.Vertical));
+        //Debug.Log("Attack " + GetButton(InputActions.Attack));
     }
 	private Player rewiredPlayer
 	{
