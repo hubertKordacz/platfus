@@ -146,8 +146,8 @@ MonoBehaviour:
   startingRadius: 2.1
   rotationSpeed: 5
   targetY: 5
-  explosionForce: 10
-  explosionRadius: 1
+  explosionForce: 450
+  explosionRadius: 10
   dropCurve:
     serializedVersion: 2
     m_Curve:
