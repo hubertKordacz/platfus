@@ -35,7 +35,7 @@ public class Meteor : MonoBehaviour
 			Destroy(projector);
 
 		}
-
+		this.GetComponent<Rigidbody>().useGravity = true;
 
 		Collider[] overlaped= 	Physics.OverlapSphere(this.transform.position, explosionRadius);
 
