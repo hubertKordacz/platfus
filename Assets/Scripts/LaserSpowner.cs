@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteorSpowner : MonoBehaviour {
+public class LaserSpowner : MonoBehaviour {
 
 
 
-	public Rigidbody meteorPrefab;
+	public List<Laser> laserPrefabList = new List<Laser>();
 
 	[SerializeField]
 	public AnimationCurve spownRate = AnimationCurve.Linear(0,1.0f,10.0f,2.0f);
@@ -24,20 +24,19 @@ public class MeteorSpowner : MonoBehaviour {
 
 	void Update () {
 
-		if(Time.time >= this.nextSpawnTS)
+		if(Time.time >= this.nextSpawnTS && laserPrefabList.Count!=0)
 		{
-			this.Spawn(this.meteorPrefab);
+			this.Spawn(laserPrefabList[0]);
+			laserPrefabList.RemoveAt(0);
 			this.CalculateNextSpownTS();
 		}
 	}
 
-	private void Spawn(Rigidbody orignal)
+	private void Spawn(Laser orignal)
 	{
 		GameObject instance= 	Instantiate(orignal.gameObject, this.transform.position, this.transform.rotation);
-		instance.transform.position += this.transform.up * this.transform.localScale.y/2f * Random.Range(-1f,1f) ;
-		instance.transform.position += this.transform.right * this.transform.localScale.x/2f * Random.Range(-1f,1f) ;
-		instance.GetComponent<Rigidbody>().velocity = instance.transform.forward * this.speed;
 		this.spownedCount++;
+
 	}
 
 	private void CalculateNextSpownTS()
