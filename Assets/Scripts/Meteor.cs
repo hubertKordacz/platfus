@@ -8,6 +8,7 @@ public class Meteor : MonoBehaviour
 	public float explosionRadius = 10;
 	public float explosionForce = 100;
 	private bool isOnGround = false;
+    public float massOnGrounded;
     // Use this for initialization
     void Start()
     {
@@ -37,7 +38,9 @@ public class Meteor : MonoBehaviour
 		}
 		this.GetComponent<Rigidbody>().useGravity = true;
 
-		Collider[] overlaped= 	Physics.OverlapSphere(this.transform.position, explosionRadius);
+        this.GetComponent<Rigidbody>().mass = massOnGrounded;
+
+        Collider[] overlaped= 	Physics.OverlapSphere(this.transform.position, explosionRadius);
 
 		foreach (Collider colider  in overlaped)
 		{
