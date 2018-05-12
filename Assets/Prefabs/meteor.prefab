@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 5
   explosionForce: 750
+  massOnGrounded: 1
 --- !u!119 &119465495675769916
 Projector:
   m_ObjectHideFlags: 1
