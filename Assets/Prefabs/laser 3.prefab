@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 136994788657980522}
   - component: {fileID: 114215685613482762}
   m_Layer: 0
-  m_Name: laser 2
+  m_Name: laser 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationCenter: {x: 0, y: 0, z: 0}
-  startingRotation: 45
+  startingRotation: 135
   startingRadius: 2
   rotationSpeed: 0
   radiusSpeedCurve:
