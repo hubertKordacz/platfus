@@ -29,7 +29,7 @@ public class Meteor : MonoBehaviour
         if (marker && Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            marker.transform.position = hit.point;
+            marker.transform.position = hit.point + new Vector3(0,0.3f,0);
             marker.transform.rotation = hit.collider.transform.rotation;
             Debug.Log("Did Hit");
         }
