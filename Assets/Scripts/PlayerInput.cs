@@ -27,11 +27,10 @@ public class PlayerInput : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 
-        //Debug.Log("Axis " + GetAxis(InputActions.Vertical));
-        //Debug.Log("Attack " + GetButton(InputActions.Attack));
-    }
+		//Debug.Log("P " + this.playerId + " " +(int)playerId + " "+ rewiredPlayer.name  + " "+ GetAxis(InputActions.Horizontal));
+    //}
 	private Player rewiredPlayer
 	{
 		get
