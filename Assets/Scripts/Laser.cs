@@ -22,7 +22,9 @@ public class Laser : MonoBehaviour
 
 	private bool isDropping = true;
 	public float radiusDirection = -1;
-	// Update is called once per frame
+    // Update is called once per frame
+
+    public GameObject sparks;
 
 
 	private void Awake()
@@ -49,9 +51,12 @@ public class Laser : MonoBehaviour
 				isDropping = false;
 				this.transform.position = new Vector3(this.transform.position.x, targetY, this.transform.position.z);
 
-				// is Grounded ;)
-			}
+                // is Grounded ;)
 
+                sparks.SetActive(true);
+
+			}
+            return;
 		}
 
 		transform.RotateAround(rotationCenter, Vector3.up, rotationSpeed * Time.deltaTime);

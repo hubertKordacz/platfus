@@ -451,15 +451,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1508470983904474}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.49, y: 3.634, z: -1.49}
+  m_LocalRotation: {x: -0, y: 0.7933532, z: -0, w: 0.6087617}
+  m_LocalPosition: {x: 2.41, y: 3.504, z: 0.75}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4493114986791250}
   - {fileID: 4239868547227636}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 105.00001, z: 0}
 --- !u!4 &4702905712301070
 Transform:
   m_ObjectHideFlags: 1
@@ -578,7 +578,7 @@ BoxCollider:
   m_GameObject: {fileID: 1850617146571410}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.125, y: 0.19346121, z: 0.10000001}
   m_Center: {x: 0, y: 0.0032693893, z: 0}
@@ -620,6 +620,7 @@ MonoBehaviour:
   minChargeForce: 8
   maxChargeForce: 18
   hitMultiplier: 10
+  stunDuration: 1
   _animator: {fileID: 95539584940577010}
 --- !u!114 &114846815532755620
 MonoBehaviour:
@@ -656,7 +657,7 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2.0000005
-  m_Direction: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137916186886898900
 SkinnedMeshRenderer:
