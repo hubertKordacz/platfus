@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainPanel : MenuPanel
 {
-    public override void OnCofirm(int player)
+    public override void OnConfirm(int player)
     {
         if (player > 0) return;
 
