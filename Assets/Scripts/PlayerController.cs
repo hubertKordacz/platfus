@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float minChargeForce = 50, maxChargeForce = 500;
     public float hitMultiplier = 2f;
 
+    [SerializeField]
+    Animator _animator;
     PlayerInput playerInput;
     Rigidbody _rigidbody;
     Collider _collider;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+
         Move();
         Rotate();
     }
@@ -55,6 +58,9 @@ public class PlayerController : MonoBehaviour
         var move = new Vector3(playerInput.GetAxis(PlayerInput.InputActions.Horizontal), 0, playerInput.GetAxis(PlayerInput.InputActions.Vertical));
         var lerp = 1 - _chargeForceTimer;
         _rigidbody.AddForce(move * moveSpeed * lerp);
+
+        var magnitude = move.magnitude;
+        _animator.SetFloat("Move", magnitude);
     }
 
     void Rotate()
