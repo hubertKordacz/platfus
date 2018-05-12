@@ -5,38 +5,67 @@ using UnityEngine.UI;
 
 public class CharacterPanel : MenuPanel
 {
-    public List<PlayerInput.PlayerId> players;
-    public bool[] ready;
+    public static List<PlayerInput.PlayerId> players;
 
     public Image[] slots;
+    public GameObject readyText;
+    public Image fader;
+
+    bool[] _ready;
+    bool _waitForFade;
+    float _fadeTimer;
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (!_waitForFade) return;
+
+        _fadeTimer += Time.deltaTime * 2;
+        var color = fader.color;
+        color.a = Mathf.Lerp(0, 1, _fadeTimer);
+        fader.color = color;
+
+        if (_fadeTimer >= 1)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(StageSellect.levelToLoad);
+        }
+    }
 
     public override void OnConfirm(int player)
     {
-        if (player == 0)
+        if (!_waitForFade)
         {
-            if (AllReady())
+            if (player == 0)
             {
-                Debug.Log("Start");
-                return;
+                if (AllReady())
+                {
+                    _waitForFade = true;
+                    return;
+                }
             }
-        }
 
-        if (!players.Contains((PlayerInput.PlayerId)player))
-        {
-            players.Add((PlayerInput.PlayerId)player);
-            slots[players.IndexOf((PlayerInput.PlayerId)player)].color = Color.blue;
-        }
-        else
-        {
-            var index = players.IndexOf((PlayerInput.PlayerId)player);
-            ready[index] = true;
-            slots[index].color = Color.red;
+            if (!players.Contains((PlayerInput.PlayerId)player))
+            {
+                players.Add((PlayerInput.PlayerId)player);
+                slots[players.IndexOf((PlayerInput.PlayerId)player)].color = Color.blue;
+
+                readyText.gameObject.SetActive(false);
+            }
+            else
+            {
+                var index = players.IndexOf((PlayerInput.PlayerId)player);
+                _ready[index] = true;
+                slots[index].color = Color.red;
+
+                if (AllReady()) readyText.gameObject.SetActive(true);
+            }
         }
     }
 
     public override void OnCancel(int player)
     {
-        if (player == 0 && !ready[0])
+        if (player == 0 && !_ready[0])
         {
             MainMenu.Instance.ShowPannel(MainMenu.Menu.stage);
             return;
@@ -44,9 +73,9 @@ public class CharacterPanel : MenuPanel
 
         if (players.Contains((PlayerInput.PlayerId)player))
         {
-            if (ready[players.IndexOf((PlayerInput.PlayerId)player)])
+            if (_ready[players.IndexOf((PlayerInput.PlayerId)player)])
             {
-                ready[players.IndexOf((PlayerInput.PlayerId)player)] = false;
+                _ready[players.IndexOf((PlayerInput.PlayerId)player)] = false;
                 slots[players.IndexOf((PlayerInput.PlayerId)player)].color = Color.blue;
             }
             else
@@ -61,7 +90,7 @@ public class CharacterPanel : MenuPanel
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (!ready[i]) return false;
+            if (!_ready[i]) return false;
         }
 
         return true;
@@ -72,7 +101,7 @@ public class CharacterPanel : MenuPanel
         base.OnShow();
 
         players = new List<PlayerInput.PlayerId>();
-        ready = new bool[4];
+        _ready = new bool[4];
 
         players.Add(PlayerInput.PlayerId.player1);
 
@@ -81,5 +110,7 @@ public class CharacterPanel : MenuPanel
         {
             slots[i].color = Color.white;
         }
+
+        readyText.gameObject.SetActive(false);
     }
 }

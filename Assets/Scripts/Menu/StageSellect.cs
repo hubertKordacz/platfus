@@ -19,7 +19,7 @@ public class StageSellect : MainPanel
     void ShowStageSelect(int stage)
     {
         MainMenu.Instance.ShowPannel(MainMenu.Menu.character);
-        levelToLoad = stage;
+        levelToLoad = stage + 1;
     }
 
     void Back()

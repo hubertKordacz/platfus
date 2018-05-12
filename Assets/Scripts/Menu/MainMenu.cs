@@ -38,6 +38,7 @@ public class MainMenu : MonoBehaviour
         {
             if (players.GetPlayer(i).GetButtonDown(PlayerInput.InputActions.Attack.ToString()))
             {
+                Debug.Log(i);
                 _current.OnConfirm(i);
             }
 
