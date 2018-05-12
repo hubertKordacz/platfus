@@ -59,7 +59,7 @@ public class Laser : MonoBehaviour
 		if(player!=null)
 		{
 
-			//player.stun();
+			player.Stun();
 		}
 	}
 }

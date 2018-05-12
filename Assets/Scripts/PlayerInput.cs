@@ -10,7 +10,8 @@ public class PlayerInput : MonoBehaviour {
 		player1=0,
         player2=1,
         player3=2,
-        player4=3
+		player4=3,
+        player5=4
 	}
 	public  enum InputActions
 	{
