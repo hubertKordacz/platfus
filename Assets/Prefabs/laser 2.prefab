@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationCenter: {x: 0, y: 0, z: 0}
-  startingRotation: 30
-  startingRadius: 4
+  startingRotation: 45
+  startingRadius: 2
   rotationSpeed: 0
   radiusSpeedCurve:
     serializedVersion: 2
