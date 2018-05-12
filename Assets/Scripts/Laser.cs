@@ -6,13 +6,21 @@ public class Laser : MonoBehaviour
 
 
 	public Vector3 rotationCenter = Vector3.zero;
-	public float startingRotation = 30;
-	public float startingRadius = 4;
-	public float rotationSpeed = 1;
+	public float startingRotation = 30f;
+	public float startingRadius = 4f;
+	public float rotationSpeed = 1f;
+	public float targetY = 5f;
+
+	public float explosionForce = 10f;
+	public float explosionRadius =1f;
+
+	[SerializeField]
+    public AnimationCurve dropCurve = AnimationCurve.EaseInOut(0, 0.2f, 1f, 2f);
 	[SerializeField]
 	public AnimationCurve radiusSpeedCurve = AnimationCurve.EaseInOut(0, 10f, 1f, 15f);
 	public Vector2 radiusLimits = new Vector2(2, 20);
-    
+
+	private bool isDropping = true;
 	public float radiusDirection = -1;
 	// Update is called once per frame
 
@@ -26,8 +34,26 @@ public class Laser : MonoBehaviour
 	}
 
 	void Update()
-    {      
-	
+    {
+
+		if (isDropping)
+		{
+			if (this.transform.position.y - targetY > 0.1)
+			{
+				
+				this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-this.dropCurve.Evaluate(Mathf.Abs(this.transform.position.y - targetY))*Time.deltaTime, this.transform.position.z);
+   
+	        }
+			else
+			{
+				isDropping = false;
+				this.transform.position = new Vector3(this.transform.position.x, targetY, this.transform.position.z);
+
+				// is Grounded ;)
+			}
+
+		}
+
 		transform.RotateAround(rotationCenter, Vector3.up, rotationSpeed * Time.deltaTime);
 
 
@@ -58,7 +84,7 @@ public class Laser : MonoBehaviour
 		PlayerController player = other.GetComponent<PlayerController>();
 		if(player!=null)
 		{
-
+			player.GetComponent<Rigidbody>().AddExplosionForce(this.explosionForce, new Vector3(this.transform.position.x, other.transform.position.y, this.transform.position.z), this.explosionRadius);
 			player.Stun();
 		}
 	}

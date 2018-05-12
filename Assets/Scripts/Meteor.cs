@@ -77,7 +77,7 @@ public class Meteor : MonoBehaviour
 			if(rb!=null)
 			{            
 				rb.AddExplosionForce(this.explosionForce, this.transform.position, this.explosionRadius);
-                Debug.Log(rb.gameObject);
+                
 			}
 			//if(rigidbody.gameObject.tag("ground"))
 		}
