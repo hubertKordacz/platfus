@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody _rigidbody;
     Collider _collider;
     float _chargeForceTimer;
-    bool _isCharging;
+    bool _isCharging, _chargeBlocked;
+    IEnumerator _courutine;
 
     public Rigidbody Rigidbody { get { { return _rigidbody; } } }
     public Collider Collider { get { { return _collider; } } }
@@ -42,7 +43,6 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
-
 
         Move();
         Rotate();
@@ -86,10 +86,12 @@ public class PlayerController : MonoBehaviour
 
                 Push(transform.forward * -5);
                 _chargeForceTimer = 0;
-                _isCharging = false;
+                _isCharging = false;               
             }
             return;
         }
+
+        if (_chargeBlocked) return;
 
         if (playerInput.GetButtonUp(PlayerInput.InputActions.Attack))
         {
@@ -98,6 +100,8 @@ public class PlayerController : MonoBehaviour
             var lerp = _chargeForceTimer;
             var force = Mathf.Lerp(minChargeForce, maxChargeForce, lerp);
             _rigidbody.velocity = transform.forward * force;
+
+            StartCoroutine(BlockCharge());
 
             return;
         }
@@ -116,5 +120,26 @@ public class PlayerController : MonoBehaviour
         _rigidbody.isKinematic = false;
 
         _rigidbody.velocity = force;
+    }
+
+    public void Stun()
+    {
+        if (_courutine != null) StopCoroutine(_courutine);
+        _courutine = StunPlyer();
+        StartCoroutine(_courutine);
+    }
+
+    IEnumerator StunPlyer()
+    {
+        _animator.SetBool("Stun", true);
+        yield return new WaitForSeconds(1f);
+        _animator.SetBool("Stun", false);
+    }
+
+    IEnumerator BlockCharge()
+    {
+        _chargeBlocked = true;
+        yield return new WaitForSeconds(1f);
+        _chargeBlocked = false;
     }
 }
