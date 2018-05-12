@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 50;
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public float minChargeForce = 50, maxChargeForce = 500;
 
+    PlayerInput playerInput;
     Rigidbody _rigidbody;
     Collider _collider;
     float _chargeForceTimer;
@@ -20,15 +22,16 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponentInChildren<Collider>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isCharging)
         {
-            if (_rigidbody.velocity == Vector3.zero)
+            if (_rigidbody.velocity.x < 5 && _rigidbody.velocity.z < 5)
                 _isCharging = false;
             return;
         }
@@ -40,22 +43,23 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        var move = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        var move = new Vector3(playerInput.GetAxis(PlayerInput.InputActions.Horizontal), 0, playerInput.GetAxis(PlayerInput.InputActions.Vertical));
         var lerp = 1 - _chargeForceTimer;
         _rigidbody.AddForce(move * moveSpeed * lerp);
     }
 
     void Rotate()
     {
-        if (_rigidbody.velocity == Vector3.zero) return;
+        var move = new Vector3(playerInput.GetAxis(PlayerInput.InputActions.Horizontal), 0, playerInput.GetAxis(PlayerInput.InputActions.Vertical));
+        if (move == Vector3.zero) return;
 
-        Quaternion wantedRotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
+        Quaternion wantedRotation = Quaternion.LookRotation(move);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, wantedRotation, rotationSpeed * Time.deltaTime);
     }
 
     void Charge()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (playerInput.GetButtonUp(PlayerInput.InputActions.Attack))
         {
             _isCharging = true;
 
@@ -67,10 +71,15 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (playerInput.GetButton(PlayerInput.InputActions.Attack))
         {
             _chargeForceTimer += Time.deltaTime;
             _chargeForceTimer = Mathf.Clamp(_chargeForceTimer, 0, 1);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 }
