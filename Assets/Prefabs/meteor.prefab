@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67463c8843d440f18b6f78d72f3f1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 3
+  explosionRadius: 10
   explosionForce: 750
 --- !u!119 &119661656156647060
 Projector:
