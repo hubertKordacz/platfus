@@ -13,14 +13,5 @@ public class DestroyBelowY : MonoBehaviour {
 			Destroy(this.gameObject);
 	}
 
-	private void OnCollisionEnter(Collision collision)
-	{
-		Projector projector = this.GetComponent<Projector>();
 
-		if(projector!=null)
-		{
-			Destroy(projector);
-
-		}
-	}
 }
