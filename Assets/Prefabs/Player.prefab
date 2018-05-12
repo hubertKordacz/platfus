@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 114552574004049940}
   - component: {fileID: 114846815532755620}
   - component: {fileID: 136466734301953266}
+  - component: {fileID: 114880875900775496}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -451,8 +452,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1508470983904474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.31, y: 0.294, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0.49, y: 3.634, z: -1.49}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4493114986791250}
   - {fileID: 4239868547227636}
@@ -550,7 +551,7 @@ Rigidbody:
   m_GameObject: {fileID: 1508470983904474}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1.5
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -579,8 +580,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.125, y: 0.2, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.125, y: 0.19346121, z: 0.10000001}
+  m_Center: {x: 0, y: 0.0032693893, z: 0}
 --- !u!95 &95539584940577010
 Animator:
   serializedVersion: 3
@@ -614,11 +615,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   hitCollider: {fileID: 65017880599669812}
-  moveSpeed: 30
+  moveSpeed: 25
   rotationSpeed: 500
-  minChargeForce: 5
-  maxChargeForce: 10
-  hitMultiplier: 2
+  minChargeForce: 8
+  maxChargeForce: 18
+  hitMultiplier: 10
   _animator: {fileID: 95539584940577010}
 --- !u!114 &114846815532755620
 MonoBehaviour:
@@ -632,6 +633,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
+--- !u!114 &114880875900775496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508470983904474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9056e7d5678b467dac92394c16d8d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Yvalue: -10
 --- !u!136 &136466734301953266
 CapsuleCollider:
   m_ObjectHideFlags: 1
