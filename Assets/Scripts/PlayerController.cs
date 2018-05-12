@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 50;
     public float rotationSpeed = 500;
     public float minChargeForce = 50, maxChargeForce = 500;
-    public float hitMultiplier = 2f;
+	public float hitMultiplier = 2f;
+    public float stunDuration = 1f;
 
     [SerializeField]
     Animator _animator;
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+		if (_animator.GetBool("Stun"))
+            return;
+		
         if (_isCharging)
         {
             if (_rigidbody.velocity.x < 5 && _rigidbody.velocity.z < 5)
@@ -50,7 +54,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+		if (_animator.GetBool("Stun"))
+			return;
         Charge();
+
+
     }
 
     void Move()
@@ -132,7 +141,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator StunPlyer()
     {
         _animator.SetBool("Stun", true);
-        yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(stunDuration);
         _animator.SetBool("Stun", false);
     }
 
