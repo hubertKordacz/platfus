@@ -3,42 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-    public float rotationSpeed;
+    public float moveSpeed = 50;
+    public float rotationSpeed = 500;
 
+    public float minChargeForce = 50, maxChargeForce = 500;
+
+    PlayerInput playerInput;
     Rigidbody _rigidbody;
     Collider _collider;
+    float _chargeForceTimer;
+    bool _isCharging;
 
     public Rigidbody Rigidbody { get { { return _rigidbody; } } }
     public Collider Collider { get { { return _collider; } } }
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
+        _collider = GetComponentInChildren<Collider>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        Move(move);
-
-        if (_rigidbody.velocity.x != 0 && _rigidbody.velocity.y != 0)
+        if (_isCharging)
         {
-            //transform.eulerAngles = 
-            Debug.Log(_rigidbody.velocity);
-            transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+            if (_rigidbody.velocity.x < 5 && _rigidbody.velocity.z < 5)
+                _isCharging = false;
+            return;
+        }
+
+        Move();
+        Rotate();
+        Charge();
+    }
+
+    void Move()
+    {
+        var move = new Vector3(playerInput.GetAxis(PlayerInput.InputActions.Horizontal), 0, playerInput.GetAxis(PlayerInput.InputActions.Vertical));
+        var lerp = 1 - _chargeForceTimer;
+        _rigidbody.AddForce(move * moveSpeed * lerp);
+    }
+
+    void Rotate()
+    {
+        var move = new Vector3(playerInput.GetAxis(PlayerInput.InputActions.Horizontal), 0, playerInput.GetAxis(PlayerInput.InputActions.Vertical));
+        if (move == Vector3.zero) return;
+
+        Quaternion wantedRotation = Quaternion.LookRotation(move);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, wantedRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    void Charge()
+    {
+        if (playerInput.GetButtonUp(PlayerInput.InputActions.Attack))
+        {
+            _isCharging = true;
+
+            var lerp = _chargeForceTimer;
+            var force = Mathf.Lerp(minChargeForce, maxChargeForce, lerp);
+            _rigidbody.velocity = transform.forward * force;
+
+            _chargeForceTimer = 0;
+            return;
+        }
+
+        if (playerInput.GetButton(PlayerInput.InputActions.Attack))
+        {
+            _chargeForceTimer += Time.deltaTime;
+            _chargeForceTimer = Mathf.Clamp(_chargeForceTimer, 0, 1);
         }
     }
 
-    void Move(Vector3 force)
+    private void OnCollisionEnter(Collision collision)
     {
-        _rigidbody.AddForce(force * moveSpeed);
-
 
     }
 }
