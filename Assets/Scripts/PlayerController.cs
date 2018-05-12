@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 50;
     public float rotationSpeed = 500;
     public float minChargeForce = 50, maxChargeForce = 500;
+    public float hitMultiplier = 2f;
 
     PlayerInput playerInput;
     Rigidbody _rigidbody;
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit[i] == _collider) continue;
 
-                var force = _rigidbody.velocity * 2;
+                var force = _rigidbody.velocity * hitMultiplier;
                 hit[i].transform.parent.GetComponent<PlayerController>().Push(force);
 
                 Push(transform.forward * -5);
