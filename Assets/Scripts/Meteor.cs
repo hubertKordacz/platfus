@@ -26,7 +26,7 @@ public class Meteor : MonoBehaviour
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (marker && Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+        if (marker && Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity,LayerMask.GetMask("Ground")))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             marker.transform.position = hit.point + new Vector3(0,0.3f,0);

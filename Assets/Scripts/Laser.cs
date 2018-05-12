@@ -49,7 +49,7 @@ public class Laser : MonoBehaviour
 			else
 			{
 				isDropping = false;
-				this.transform.position = new Vector3(this.transform.position.x, targetY, this.transform.position.z);
+				this.transform.position = new Vector3(this.transform.position.x, targetY + 3, this.transform.position.z);
 
                 // is Grounded ;)
 
