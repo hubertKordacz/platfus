@@ -8,7 +8,6 @@ public class MainMenu : MonoBehaviour
 
     public MenuPanel main, character, stage;
 
-    [SerializeField]
     MenuPanel _current;
 
     public enum Menu
