@@ -6,7 +6,7 @@ public class LaserSpowner : MonoBehaviour {
 
 
 
-	public List<Laser> laserPrefabList = new List<Laser>();
+	public List<GameObject> laserPrefabList = new List<GameObject>();
 
 	[SerializeField]
 	public AnimationCurve spownRate = AnimationCurve.Linear(0,1.0f,10.0f,2.0f);
@@ -32,7 +32,7 @@ public class LaserSpowner : MonoBehaviour {
 		}
 	}
 
-	private void Spawn(Laser orignal)
+	private void Spawn(GameObject orignal)
 	{
 		GameObject instance= 	Instantiate(orignal.gameObject, this.transform.position, this.transform.rotation);
 		this.spownedCount++;
