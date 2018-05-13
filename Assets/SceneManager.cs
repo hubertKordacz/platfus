@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    PlayerController[] players;
+    public PlayerController[] players;
+
+    bool _loading = false;
 
     public void Update()
     {
+        if (_loading) return;
+
         for (int i = 0; i < players.Length; i++)
         {
-            if (players[i] != null || players[i].gameObject.activeInHierarchy)
+            if (players[i].Equals(null)) continue;
+            if (!players[i].Equals(null) && players[i].gameObject && players[i].gameObject.activeInHierarchy)
                 return;
-
         }
+
+        _loading = true;
+        StartCoroutine(NextLevel());
+    }
+
+    IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(1);
+
         StageSellect.levelToLoad++;
         if (StageSellect.levelToLoad < 4)
         {

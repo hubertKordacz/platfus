@@ -44,7 +44,7 @@ public class CharacterPanel : MenuPanel
                 if (AllReady())
                 {
                     _waitForFade = true;
-                    ScoreManager.Instance.ResetGame();
+                    ScoreManager.ResetGame();
                     return;
                 }
             }

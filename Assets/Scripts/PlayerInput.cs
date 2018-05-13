@@ -48,7 +48,7 @@ public class PlayerInput : MonoBehaviour
 
     private void OnDestroy()
     {
-        ScoreManager.Instance.SetPoints((int)playerId);
+        if (ScoreManager.Instance) ScoreManager.Instance.SetPoints((int)playerId);
     }
 
     // Update is called once per frame

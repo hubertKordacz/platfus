@@ -25,6 +25,7 @@ public class PlayerUIModel : MonoBehaviour
                 {
                     _skinnedMesh.material = _materials[i];
                     score.gameObject.SetActive(true);
+                    score.text = ScoreManager.GetPoints((int)playerId).ToString();
                     return;
                 }
             }
