@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour
 {
-    Color normal = Color.white, highlight = Color.blue;
+    public Sprite normal, highlight;
 
     public MenuButton up, down, right, left;
     public Image target;
@@ -17,12 +17,12 @@ public class MenuButton : MonoBehaviour
 
     public void OnSellect()
     {
-        if (target) target.color = highlight;
+        if (target) target.sprite = highlight;
     }
 
     public void OnDiselect()
     {
-        if (target) target.color = normal;
+        if (target) target.sprite = normal;
     }
 
     public MenuButton OnRight()
