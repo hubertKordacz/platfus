@@ -15,10 +15,11 @@ public class Meteor : MonoBehaviour
     public GameObject particleOnGrounded;
     public GameObject fallingAura;
 
+    public AudioSource explodeSound;
     // Use this for initialization
     void Start()
     {
-
+        explodeSound = GetComponent<AudioSource>();
     }
 
     void Update ()
@@ -47,6 +48,7 @@ public class Meteor : MonoBehaviour
 		if (!isOnGround)
 		{
 			OnGroundCollision();
+            explodeSound.Play();
             Destroy(marker);
             Destroy(fallingAura);
 

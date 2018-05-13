@@ -25,6 +25,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
 
     public GameObject sparks;
+    public GameObject particleOnGrounded;
 
 
 	private void Awake()
@@ -40,9 +41,10 @@ public class Laser : MonoBehaviour
 
 		if (isDropping)
 		{
-			if (this.transform.position.y - targetY > 0.1)
+
+            if (this.transform.position.y - targetY > 0.1)
 			{
-				
+                
 				this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y-this.dropCurve.Evaluate(Mathf.Abs(this.transform.position.y - targetY))*Time.deltaTime, this.transform.position.z);
    
 	        }
