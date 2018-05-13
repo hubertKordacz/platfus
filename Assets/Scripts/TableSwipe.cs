@@ -15,14 +15,16 @@ public class TableSwipe : MonoBehaviour
 	public Quaternion targetRotation = Quaternion.identity;
 	[SerializeField]
 	public AnimationCurve rotationOverTime = AnimationCurve.Linear(0, 1f, 1f, 1f);
-    
+	public bool goBack = false;
 	private float startTime;
 	private bool isPlaying;
+	private bool isGoingBack;
 
     void Start()
     {
 		this.startPosition = this.transform.position;
         this.startRotation = this.transform.rotation;
+
     }
 
     public void Swipe()
@@ -32,6 +34,7 @@ public class TableSwipe : MonoBehaviour
 
 
 		Debug.Log("swipe");
+		this.isGoingBack = false;
 		this.isPlaying = true;
 		this.transform.position=this.startPosition;
 		this.transform.rotation=this.startRotation;
@@ -46,9 +49,20 @@ public class TableSwipe : MonoBehaviour
 			return;
 		float t = (Time.time - this.startTime) / this.time;
 
-        if(t>1f)
+		if (isGoingBack)
+			t = 1f - t;
+
+		if((t>1f  && !isGoingBack )|| (t<0f && isGoingBack))
 		{
-			isPlaying = false;
+
+
+			if (isGoingBack || !goBack)
+				isPlaying = false;
+			else
+			{
+				isGoingBack = true;
+				this.startTime = Time.time+1f;
+			}
 			return;
 				
 		}

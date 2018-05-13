@@ -11,7 +11,8 @@ public class Table : MonoBehaviour
 	public Vector3 overlapSize = Vector3.one;
 	public Vector3 overlapOffset= Vector3.zero;
     
-	public float hitToSwipeRatio=0.7f;
+	public float swipeRatio = 0.7f;
+	public float mukaRatio=0.2f;
 	public List<TableSwipe> swipeAnims = new List<TableSwipe>();
 	public List<GameObject> swipeMarkers = new List<GameObject>();
 
@@ -19,7 +20,8 @@ public class Table : MonoBehaviour
     public AnimationCurve spownRate = AnimationCurve.Linear(0, 1.0f, 10.0f, 2.0f);
 
   
-	  public TableSwipe hit;
+	public TableSwipe hit;
+	  public TableSwipe muka;
 	private float nextSpawnTS;
     private float spownedCount = 0;
 	private bool inProgress = false;
@@ -40,10 +42,12 @@ public class Table : MonoBehaviour
 
             this.spownedCount++;
 
-			if (Random.value < this.hitToSwipeRatio)
+			if (Random.value < this.swipeRatio)
 				DoSwipe();
 			else
-
+				if(Random.value < this.mukaRatio)
+					StartCoroutine(Muka());
+			    else 
 				StartCoroutine(HitWave());
 
          
@@ -100,6 +104,11 @@ public class Table : MonoBehaviour
         marker.gameObject.SetActive(false);
         yield return new WaitForSeconds(swipe.time / 10);
   
+
+		if(swipe.goBack)
+        yield return new WaitForSeconds(swipe.time +1f);
+
+  
 		this.CalculateNextSpownTS();
         
     }
@@ -116,7 +125,14 @@ public class Table : MonoBehaviour
 		Gizmos.color = Color.blue;
 		Gizmos.DrawWireCube(this.transform.position + this.overlapOffset, this.overlapSize);
 	}
- 
+	private IEnumerator Muka()
+    {
+        this.muka.Swipe();
+		yield return new WaitForSeconds(this.muka.time*2+1);
+             
+        this.CalculateNextSpownTS();
+    }
+
 
 
     private IEnumerator HitWave()
@@ -124,7 +140,7 @@ public class Table : MonoBehaviour
 		this.hit.Swipe();
 		yield return new WaitForSeconds(this.hit.time);
 		Hit(hitForce);  
-
+		yield return new WaitForSeconds(this.hit.time+1);
 		this.CalculateNextSpownTS();
     }
 
