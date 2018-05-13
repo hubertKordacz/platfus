@@ -32,7 +32,14 @@ public class PlayerController : MonoBehaviour
 
     public GameObject stunParticleSpawnPoint;
 
-    private bool miniStunState = false;
+	private bool miniStunState = false;
+    private bool isFalling = false;
+
+
+	public float fallY = -1;
+	public AudioSource attackSound;
+	public AudioSource stunSound;
+	public AudioSource fallSound;
 
     private void Awake()
     {
@@ -43,7 +50,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_animator.GetBool("Stun"))
+		if(!isFalling && this.transform.position.y < fallY)
+		{
+			OnFall();
+
+		}
+
+		if (_animator.GetBool("Stun") || isFalling)
             return;
 
         Move();
@@ -76,8 +89,7 @@ public class PlayerController : MonoBehaviour
     void Attack()
 
     {
-
-        Debug.Log(_animator.GetCurrentAnimatorStateInfo(1).IsName("Attack_2"));
+  
         if (_animator.GetCurrentAnimatorStateInfo(1).IsName("Attack_2"))
         {
             if (_isAttacking)
@@ -107,6 +119,9 @@ public class PlayerController : MonoBehaviour
             _isAttacking = true;
             _animator.SetTrigger("Attack");
 
+
+			if (this.attackSound)
+				this.attackSound.Play();
         }
             
        
@@ -195,6 +210,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator StunPlyer(float  duration)
     {
         _animator.SetBool("Stun", true);
+
+		if (this.stunSound)
+			this.stunSound.Play();
+		
         if (miniStunState != true)
         stunParticleSpawnPoint.SetActive(true);
         yield return new WaitForSeconds(duration);
@@ -202,6 +221,16 @@ public class PlayerController : MonoBehaviour
         stunParticleSpawnPoint.SetActive(false);
         _animator.SetBool("Stun", false);
     }
+
+    void OnFall()
+	{
+		if (this.fallSound)
+			this.fallSound.Play();
+
+		Debug.Log("ON FALLLLLL!");
+		this.isFalling = true;
+		_animator.SetFloat("Move", 0);
+	}
 
     IEnumerator BlockCharge()
     {
