@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
+    public bool die = false;
+
     public LayerMask hitLayer;
     public BoxCollider hitCollider;
     public float moveSpeed = 50;
@@ -53,7 +55,6 @@ public class PlayerController : MonoBehaviour
 		if(!isFalling && this.transform.position.y < fallY)
 		{
 			OnFall();
-
 		}
 
 		if (_animator.GetBool("Stun") || isFalling)

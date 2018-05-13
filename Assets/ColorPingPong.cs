@@ -13,8 +13,8 @@ public class ColorPingPong : MonoBehaviour
 
     void Update()
     {
-        var color = image.color;
-        color.a = Mathf.PingPong(Time.time, 1 - maxAlphaCut) + maxAlphaCut;
-        image.color = color;
+        //var color = image.color;
+        //color.a = Mathf.PingPong(Time.time, 1 - maxAlphaCut) + maxAlphaCut;
+        //image.color = color;
     }
 }
