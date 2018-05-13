@@ -14,7 +14,7 @@ public class MainPanel : MenuPanel
 
     void ShowCharacterSelect()
     {
-        MainMenu.Instance.ShowPannel(MainMenu.Menu.stage);
+        MainMenu.Instance.ShowPannel(MainMenu.Menu.character);
     }
 
     private void QuitGame()

@@ -25,7 +25,6 @@ public class PlayerUIModel : MonoBehaviour
                 {
                     _skinnedMesh.material = _materials[i];
                     score.gameObject.SetActive(true);
-                    score.text = "0";
                     return;
                 }
             }
@@ -34,4 +33,5 @@ public class PlayerUIModel : MonoBehaviour
             score.gameObject.SetActive(false);
         }
     }
+
 }

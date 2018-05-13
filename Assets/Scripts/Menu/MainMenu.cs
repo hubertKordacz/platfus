@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        StageSellect.levelToLoad = 1;
     }
 
     void Start()

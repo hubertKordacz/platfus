@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     public GameObject hitParticleSpawnPoint;
     public GameObject hitParticle;
 
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -42,8 +41,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_animator.GetBool("Stun"))
             return;
-
-      
 
         Move();
         Rotate();
