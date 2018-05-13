@@ -5,6 +5,8 @@ using Rewired;
 
 public class PlayerInput : MonoBehaviour
 {
+    public SkinnedMeshRenderer _skinnedMesh;
+    public Material[] _materials;
 
     public enum PlayerId
     {
@@ -26,7 +28,22 @@ public class PlayerInput : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        if (CharacterPanel.players == null)
+        {
+            _skinnedMesh.material = _materials[(int)playerId];
+        }
+        else
+        {
+            for (int i = 0; i < CharacterPanel.players.Count; i++)
+            {
+                if (CharacterPanel.players[i] == playerId)
+                {
+                    _skinnedMesh.material = _materials[i];
+                    return;
+                }
+            }
+            gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
