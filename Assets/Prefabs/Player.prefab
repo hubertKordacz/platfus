@@ -267,7 +267,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4239868547227636}
   - component: {fileID: 95539584940577010}
-  - component: {fileID: 65896194668740790}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -570,18 +569,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65896194668740790
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1850617146571410}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.125, y: 0.19346121, z: 0.10000001}
-  m_Center: {x: 0, y: 0.0032693893, z: 0}
 --- !u!95 &95539584940577010
 Animator:
   serializedVersion: 3
@@ -615,12 +602,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   hitCollider: {fileID: 65017880599669812}
-  moveSpeed: 25
-  rotationSpeed: 500
-  minChargeForce: 8
-  maxChargeForce: 18
-  hitMultiplier: 10
-  stunDuration: 1
+  moveSpeed: 16
+  rotationSpeed: 600
+  minChargeForce: 0
+  maxChargeForce: 1
+  hitMultiplier: 550
+  stunDuration: 2
+  miniStunDuration: 0.5
   _animator: {fileID: 95539584940577010}
 --- !u!114 &114846815532755620
 MonoBehaviour:
