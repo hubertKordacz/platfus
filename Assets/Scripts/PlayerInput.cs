@@ -48,6 +48,11 @@ public class PlayerInput : MonoBehaviour
 
     private void OnDestroy()
     {
+        
+    }
+
+    public void SetPoints()
+    {
         if (ScoreManager.Instance) ScoreManager.Instance.SetPoints((int)playerId);
     }
 
