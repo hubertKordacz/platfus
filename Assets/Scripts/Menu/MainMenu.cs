@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
     {
         Instance = this;
         StageSellect.levelToLoad = 1;
+        SceneManager.secondRound = false;
     }
 
     void Start()

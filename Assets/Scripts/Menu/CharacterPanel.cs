@@ -7,7 +7,7 @@ public class CharacterPanel : MenuPanel
 {
     public static List<PlayerInput.PlayerId> players;
 
-    public Text[] texts;
+    public Image[] join, ready;
     public Material[] materials;
     public PlayerInput[] models;
 
@@ -55,7 +55,9 @@ public class CharacterPanel : MenuPanel
 
                 models[player].gameObject.SetActive(true);
                 models[player]._skinnedMesh.material = materials[players.IndexOf((PlayerInput.PlayerId)player)];
-                texts[player].gameObject.SetActive(false);
+
+                join[player].gameObject.SetActive(false);
+                ready[player].gameObject.SetActive(false);
 
                 readyText.gameObject.SetActive(false);
             }
@@ -64,8 +66,8 @@ public class CharacterPanel : MenuPanel
                 var index = players.IndexOf((PlayerInput.PlayerId)player);
                 _ready[index] = true;
 
-                texts[player].gameObject.SetActive(true);
-                texts[player].text = "Ready";
+                join[index].gameObject.SetActive(false);
+                ready[index].gameObject.SetActive(true);
 
                 if (AllReady()) readyText.gameObject.SetActive(true);
             }
@@ -86,15 +88,17 @@ public class CharacterPanel : MenuPanel
             {
                 _ready[players.IndexOf((PlayerInput.PlayerId)player)] = false;
 
-                texts[player].gameObject.SetActive(false);
+                join[players.IndexOf((PlayerInput.PlayerId)player)].gameObject.SetActive(false);
+                ready[players.IndexOf((PlayerInput.PlayerId)player)].gameObject.SetActive(false);
             }
             else
             {
                 players.Remove((PlayerInput.PlayerId)player);
 
                 models[player].gameObject.SetActive(false);
-                texts[player].gameObject.SetActive(true);
-                texts[player].text = "Join";
+
+                join[player].gameObject.SetActive(true);
+                ready[player].gameObject.SetActive(false);
             }
         }
     }
@@ -118,13 +122,16 @@ public class CharacterPanel : MenuPanel
 
         players.Add(PlayerInput.PlayerId.player1);
 
-        texts[0].gameObject.SetActive(false);
+
+        join[0].gameObject.SetActive(false);
+        ready[0].gameObject.SetActive(false);
+
         models[0].gameObject.SetActive(true);
 
         for (int i = 1; i < 4; i++)
         {
-            texts[i].gameObject.SetActive(true);
-            texts[i].text = "Join";
+            join[i].gameObject.SetActive(true);
+            ready[i].gameObject.SetActive(false);
             models[i].gameObject.SetActive(false);
         }
 
