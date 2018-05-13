@@ -14,7 +14,7 @@ public class LaserSpowner : MonoBehaviour {
 	private float nextSpawnTS;
 	private float spownedCount = 0;
 	// Update is called once per frame
-
+	public float speed = 10f;
 	private void Awake()
 	{
 		nextSpawnTS = Time.time;

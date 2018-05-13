@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 50;
     public float rotationSpeed = 500;
     public float minChargeForce = 50, maxChargeForce = 500;
-	public float hitMultiplier = 2f;
+    public float hitMultiplier = 2f;
     public float stunDuration = 1f;
 
     [SerializeField]
@@ -35,9 +35,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-		if (_animator.GetBool("Stun"))
+        if (_animator.GetBool("Stun"))
             return;
-		
+
         if (_isCharging)
         {
             if (_rigidbody.velocity.x < 5 && _rigidbody.velocity.z < 5)
@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-		if (_animator.GetBool("Stun"))
-			return;
+        if (_animator.GetBool("Stun"))
+            return;
         Charge();
 
 
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
                 Push(transform.forward * -5);
                 _chargeForceTimer = 0;
-                _isCharging = false;               
+                _isCharging = false;
             }
             return;
         }
@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
         if (playerInput.GetButtonUp(PlayerInput.InputActions.Attack))
         {
+            _animator.SetBool("Attack", false);
+
             _isCharging = true;
 
             var lerp = _chargeForceTimer;
@@ -117,6 +119,7 @@ public class PlayerController : MonoBehaviour
 
         if (playerInput.GetButton(PlayerInput.InputActions.Attack))
         {
+            if (!_animator.GetBool("Attack")) _animator.SetBool("Attack", true);
             _chargeForceTimer += Time.deltaTime;
             _chargeForceTimer = Mathf.Clamp(_chargeForceTimer, 0, 1);
         }
@@ -138,10 +141,15 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(_courutine);
     }
 
+    public void AddAttackForce()
+    {
+        Debug.Log("XX");
+    }
+
     IEnumerator StunPlyer()
     {
         _animator.SetBool("Stun", true);
-		yield return new WaitForSeconds(stunDuration);
+        yield return new WaitForSeconds(stunDuration);
         _animator.SetBool("Stun", false);
     }
 
