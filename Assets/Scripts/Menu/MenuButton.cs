@@ -45,11 +45,11 @@ public class MenuButton : MonoBehaviour
         return down;
     }
 
-    private void OnGUI()
-    {
-        if (Sellection.Current)
-            GUI.Label(new Rect(25, 25, 200, 25), Sellection.Current.gameObject.name);
-    }
+    //private void OnGUI()
+    //{
+    //    if (Sellection.Current)
+    //        GUI.Label(new Rect(25, 25, 200, 25), Sellection.Current.gameObject.name);
+    //}
 }
 
 public static class Sellection

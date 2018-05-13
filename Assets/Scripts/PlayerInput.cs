@@ -5,10 +5,8 @@ using Rewired;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField]
-    SkinnedMeshRenderer _skinnedMesh;
-    [SerializeField]
-    Material[] _materials;
+    public SkinnedMeshRenderer _skinnedMesh;
+    public Material[] _materials;
 
     public enum PlayerId
     {

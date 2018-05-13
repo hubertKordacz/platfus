@@ -7,7 +7,10 @@ public class CharacterPanel : MenuPanel
 {
     public static List<PlayerInput.PlayerId> players;
 
-    public Image[] slots;
+    public Text[] texts;
+    public Material[] materials;
+    public PlayerInput[] models;
+
     public GameObject readyText;
     public Image fader;
 
@@ -48,7 +51,10 @@ public class CharacterPanel : MenuPanel
             if (!players.Contains((PlayerInput.PlayerId)player))
             {
                 players.Add((PlayerInput.PlayerId)player);
-                slots[players.IndexOf((PlayerInput.PlayerId)player)].color = Color.blue;
+
+                models[player].gameObject.SetActive(true);
+                models[player]._skinnedMesh.material = materials[players.IndexOf((PlayerInput.PlayerId)player)];
+                texts[player].gameObject.SetActive(false);
 
                 readyText.gameObject.SetActive(false);
             }
@@ -56,7 +62,9 @@ public class CharacterPanel : MenuPanel
             {
                 var index = players.IndexOf((PlayerInput.PlayerId)player);
                 _ready[index] = true;
-                slots[index].color = Color.red;
+
+                texts[player].gameObject.SetActive(true);
+                texts[player].text = "Ready";
 
                 if (AllReady()) readyText.gameObject.SetActive(true);
             }
@@ -76,12 +84,16 @@ public class CharacterPanel : MenuPanel
             if (_ready[players.IndexOf((PlayerInput.PlayerId)player)])
             {
                 _ready[players.IndexOf((PlayerInput.PlayerId)player)] = false;
-                slots[players.IndexOf((PlayerInput.PlayerId)player)].color = Color.blue;
+
+                texts[player].gameObject.SetActive(false);
             }
             else
             {
                 players.Remove((PlayerInput.PlayerId)player);
-                slots[players.IndexOf((PlayerInput.PlayerId)player)].color = Color.white;
+
+                models[player].gameObject.SetActive(false);
+                texts[player].gameObject.SetActive(true);
+                texts[player].text = "Join";
             }
         }
     }
@@ -105,10 +117,14 @@ public class CharacterPanel : MenuPanel
 
         players.Add(PlayerInput.PlayerId.player1);
 
-        slots[0].color = Color.blue;
-        for (int i = 1; i < slots.Length; i++)
+        texts[0].gameObject.SetActive(false);
+        models[0].gameObject.SetActive(true);
+
+        for (int i = 1; i < 4; i++)
         {
-            slots[i].color = Color.white;
+            texts[i].gameObject.SetActive(true);
+            texts[i].text = "Join";
+            models[i].gameObject.SetActive(false);
         }
 
         readyText.gameObject.SetActive(false);
