@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9056e7d5678b467dac92394c16d8d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Yvalue: -10
+  Yvalue: -5
 --- !u!136 &136466734301953266
 CapsuleCollider:
   m_ObjectHideFlags: 1
