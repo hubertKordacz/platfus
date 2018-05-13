@@ -633,6 +633,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d6b495c184841d8bb134052927b6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skinnedMesh: {fileID: 137916186886898900}
+  _materials:
+  - {fileID: 2100000, guid: bf427982cdd57154785a34020c30a7f0, type: 2}
+  - {fileID: 2100000, guid: 1f8b4b296a84bc240b33bdb52703fe87, type: 2}
+  - {fileID: 2100000, guid: 4e852a85a4588604f8f4aa24beeb4232, type: 2}
+  - {fileID: 2100000, guid: 8ebc52c36ab39ce478acec85ebf30829, type: 2}
   playerId: 0
 --- !u!114 &114880875900775496
 MonoBehaviour:
