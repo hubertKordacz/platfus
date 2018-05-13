@@ -13,8 +13,9 @@ public class MeteorSpowner : MonoBehaviour {
 
 	private float nextSpawnTS;
 	private float spownedCount = 0;
-	// Update is called once per frame
 	public float speed = 10f;
+	// Update is called once per frame
+
 	private void Awake()
 	{
 		nextSpawnTS = Time.time;
