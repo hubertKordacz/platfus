@@ -89,8 +89,7 @@ public class PlayerController : MonoBehaviour
     void Attack()
 
     {
-
-        Debug.Log(_animator.GetCurrentAnimatorStateInfo(1).IsName("Attack_2"));
+  
         if (_animator.GetCurrentAnimatorStateInfo(1).IsName("Attack_2"))
         {
             if (_isAttacking)
@@ -227,7 +226,9 @@ public class PlayerController : MonoBehaviour
 	{
 		if (this.fallSound)
 			this.fallSound.Play();
-    
+
+		Debug.Log("ON FALLLLLL!");
+		this.isFalling = true;
 		_animator.SetFloat("Move", 0);
 	}
 

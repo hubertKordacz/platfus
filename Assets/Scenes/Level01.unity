@@ -218,6 +218,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 82590877366191922, guid: 6698642c32ae13845be890c9ef86c08c,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.498
+      objectReference: {fileID: 0}
+    - target: {fileID: 82713074273987590, guid: 6698642c32ae13845be890c9ef86c08c,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.617
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6698642c32ae13845be890c9ef86c08c, type: 2}
   m_IsPrefabParent: 0
@@ -740,6 +750,11 @@ Prefab:
       propertyPath: players.Array.data[3]
       value: 
       objectReference: {fileID: 327352984}
+    - target: {fileID: 224201608117175664, guid: eb1a8d3aef124f046b54e0c11971d377,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb1a8d3aef124f046b54e0c11971d377, type: 2}
   m_IsPrefabParent: 0

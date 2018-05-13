@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199640491522772410}
   - component: {fileID: 114089737053099228}
   m_Layer: 0
-  m_Name: CFX_Hit_A Red+RandomText
+  m_Name: HandHitParticler
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
