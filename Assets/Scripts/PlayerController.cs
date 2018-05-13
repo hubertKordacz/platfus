@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     public GameObject hitParticleSpawnPoint;
     public GameObject hitParticle;
 
+    public GameObject stunParticleSpawnPoint;
+
+    private bool miniStunState = false;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -176,8 +180,10 @@ public class PlayerController : MonoBehaviour
     {
         if (_courutine != null) StopCoroutine(_courutine);
         {
+            miniStunState = true;
             _courutine = StunPlyer(miniStunDuration);
             Instantiate(hitParticle, hitParticleSpawnPoint.transform);
+            
         }
             StartCoroutine(_courutine);
     }
@@ -189,7 +195,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator StunPlyer(float  duration)
     {
         _animator.SetBool("Stun", true);
+        if (miniStunState != true)
+        stunParticleSpawnPoint.SetActive(true);
         yield return new WaitForSeconds(duration);
+        miniStunState = false;
+        stunParticleSpawnPoint.SetActive(false);
         _animator.SetBool("Stun", false);
     }
 
