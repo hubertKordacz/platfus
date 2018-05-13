@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     Animator _animator;
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
     Rigidbody _rigidbody;
     Collider _collider;
     float _chargeForceTimer;
@@ -225,6 +225,9 @@ public class PlayerController : MonoBehaviour
 
     void OnFall()
 	{
+        playerInput.SetPoints();
+        die = true;
+
 		if (this.fallSound)
 			this.fallSound.Play();
 

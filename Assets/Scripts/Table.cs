@@ -19,7 +19,11 @@ public class Table : MonoBehaviour
 	[SerializeField]
     public AnimationCurve spownRate = AnimationCurve.Linear(0, 1.0f, 10.0f, 2.0f);
 
-  
+	public AudioSource mukaSound;
+	public AudioSource swipeSound;
+    public AudioSource hitSound;
+
+	public ParticleSystem hitParticles;
 	public TableSwipe hit;
 	  public TableSwipe muka;
 	private float nextSpawnTS;
@@ -89,8 +93,9 @@ public class Table : MonoBehaviour
         marker.gameObject.SetActive(false);
         yield return new WaitForSeconds(swipe.time / 10);
 
-
-		swipe.Swipe();
+		if (this.swipeSound)
+			this.swipeSound.Play();
+			swipe.Swipe();
 		marker.gameObject.SetActive(true);
 		yield return new WaitForSeconds(swipe.time / 10);
         marker.gameObject.SetActive(false);
@@ -127,6 +132,9 @@ public class Table : MonoBehaviour
 	}
 	private IEnumerator Muka()
     {
+
+		if (this.mukaSound)
+			this.mukaSound.Play();
         this.muka.Swipe();
 		yield return new WaitForSeconds(this.muka.time*2+1);
              
@@ -139,6 +147,13 @@ public class Table : MonoBehaviour
     {      
 		this.hit.Swipe();
 		yield return new WaitForSeconds(this.hit.time);
+
+
+		if (this.hitSound)
+			this.hitSound.Play();
+
+		if (this.hitParticles)
+			this.hitParticles.Play();
 		Hit(hitForce);  
 		yield return new WaitForSeconds(this.hit.time+1);
 		this.CalculateNextSpownTS();
