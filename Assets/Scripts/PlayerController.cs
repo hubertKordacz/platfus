@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     public Rigidbody Rigidbody { get { { return _rigidbody; } } }
     public Collider Collider { get { { return _collider; } } }
 
+    public GameObject hitParticleSpawnPoint;
+    public GameObject hitParticle;
+
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -174,8 +178,11 @@ public class PlayerController : MonoBehaviour
     public void MiniStun()
     {
         if (_courutine != null) StopCoroutine(_courutine);
-        _courutine = StunPlyer(miniStunDuration);
-        StartCoroutine(_courutine);
+        {
+            _courutine = StunPlyer(miniStunDuration);
+            Instantiate(hitParticle, hitParticleSpawnPoint.transform);
+        }
+            StartCoroutine(_courutine);
     }
     public void AddAttackForce()
     {
