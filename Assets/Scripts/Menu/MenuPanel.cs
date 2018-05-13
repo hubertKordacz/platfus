@@ -36,7 +36,12 @@ public abstract class MenuPanel : MonoBehaviour
 
     }
 
-    public virtual void OnCofirm(int player)
+    public virtual void OnConfirm(int player)
+    {
+
+    }
+
+    public virtual void OnCancel(int player)
     {
 
     }

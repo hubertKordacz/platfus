@@ -6,7 +6,7 @@ public class StageSellect : MainPanel
 {
     public static int levelToLoad = 1;
 
-    public override void OnCofirm(int player)
+    public override void OnConfirm(int player)
     {
         if (player > 0) return;
 
@@ -19,7 +19,7 @@ public class StageSellect : MainPanel
     void ShowStageSelect(int stage)
     {
         MainMenu.Instance.ShowPannel(MainMenu.Menu.character);
-        levelToLoad = stage;
+        levelToLoad = stage + 1;
     }
 
     void Back()

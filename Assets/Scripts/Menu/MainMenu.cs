@@ -33,11 +33,19 @@ public class MainMenu : MonoBehaviour
         if (_block) return;
 
         var players = ReInput.players;
+
         for (int i = 0; i < 4; i++)
         {
             if (players.GetPlayer(i).GetButtonDown(PlayerInput.InputActions.Attack.ToString()))
             {
-                _current.OnCofirm(i);
+                Debug.Log(i);
+                _current.OnConfirm(i);
+            }
+
+            //todo cancel
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _current.OnCancel(i);
             }
 
             if (Sellection.Current == null) return;
