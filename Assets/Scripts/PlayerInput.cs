@@ -39,9 +39,10 @@ public class PlayerInput : MonoBehaviour
                 if (CharacterPanel.players[i] == playerId)
                 {
                     _skinnedMesh.material = _materials[i];
-                    break;
+                    return;
                 }
             }
+            gameObject.SetActive(false);
         }
     }
 
