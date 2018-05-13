@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody Rigidbody { get { { return _rigidbody; } } }
     public Collider Collider { get { { return _collider; } } }
 
+    public GameObject hitParticleSpawnPoint;
+    public GameObject hitParticle;
+
+    public GameObject stunParticleSpawnPoint;
+
+    private bool miniStunState = false;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -38,8 +45,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_animator.GetBool("Stun"))
             return;
-
-      
 
         Move();
         Rotate();
@@ -174,8 +179,13 @@ public class PlayerController : MonoBehaviour
     public void MiniStun()
     {
         if (_courutine != null) StopCoroutine(_courutine);
-        _courutine = StunPlyer(miniStunDuration);
-        StartCoroutine(_courutine);
+        {
+            miniStunState = true;
+            _courutine = StunPlyer(miniStunDuration);
+            Instantiate(hitParticle, hitParticleSpawnPoint.transform);
+            
+        }
+            StartCoroutine(_courutine);
     }
     public void AddAttackForce()
     {
@@ -185,7 +195,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator StunPlyer(float  duration)
     {
         _animator.SetBool("Stun", true);
+        if (miniStunState != true)
+        stunParticleSpawnPoint.SetActive(true);
         yield return new WaitForSeconds(duration);
+        miniStunState = false;
+        stunParticleSpawnPoint.SetActive(false);
         _animator.SetBool("Stun", false);
     }
 

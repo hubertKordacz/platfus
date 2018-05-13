@@ -146,8 +146,8 @@ MonoBehaviour:
   startingRadius: 1.2
   rotationSpeed: -5
   targetY: 5
-  explosionForce: 450
-  explosionRadius: 10
+  explosionForce: 750
+  explosionRadius: 15
   dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -208,6 +208,7 @@ MonoBehaviour:
   radiusLimits: {x: 1.2, y: 4.8}
   radiusDirection: 0
   sparks: {fileID: 1803041259662280}
+  particleOnGrounded: {fileID: 0}
 --- !u!114 &114690298196233708
 MonoBehaviour:
   m_ObjectHideFlags: 1

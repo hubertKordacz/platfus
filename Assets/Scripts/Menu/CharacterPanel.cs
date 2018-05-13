@@ -44,6 +44,7 @@ public class CharacterPanel : MenuPanel
                 if (AllReady())
                 {
                     _waitForFade = true;
+                    ScoreManager.ResetGame();
                     return;
                 }
             }
@@ -75,7 +76,7 @@ public class CharacterPanel : MenuPanel
     {
         if (player == 0 && !_ready[0])
         {
-            MainMenu.Instance.ShowPannel(MainMenu.Menu.stage);
+            MainMenu.Instance.ShowPannel(MainMenu.Menu.main);
             return;
         }
 
