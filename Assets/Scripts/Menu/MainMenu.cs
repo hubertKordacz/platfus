@@ -19,6 +19,8 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
+
         Instance = this;
         StageSellect.levelToLoad = 1;
         SceneManager.secondRound = false;
