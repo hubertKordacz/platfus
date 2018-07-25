@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
     public static int[] score = new int[4];
-
+    
     public PlayerUIModel[] players = new PlayerUIModel[4];
 
     static int _pointsCounter;

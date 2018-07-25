@@ -8,8 +8,6 @@ public class StageSellect : MainPanel
 
     public override void OnConfirm(int player)
     {
-        if (player > 0) return;
-
         if (Sellection.Current == buttons[0]) ShowStageSelect(0);
         else if (Sellection.Current == buttons[1]) ShowStageSelect(1);
         else if (Sellection.Current == buttons[2]) ShowStageSelect(2);

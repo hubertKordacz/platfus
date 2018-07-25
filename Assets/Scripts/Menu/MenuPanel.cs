@@ -48,8 +48,6 @@ public abstract class MenuPanel : MonoBehaviour
 
     public virtual bool Vertical(int player, float value)
     {
-        if (player > 0) return false;
-
         if (value > 0.5f && Sellection.Current.up)
         {
             Sellection.SellectButton(Sellection.Current.OnUp());
@@ -66,8 +64,6 @@ public abstract class MenuPanel : MonoBehaviour
 
     public virtual bool Horizontal(int player, float value)
     {
-        if (player > 0) return false;
-
         if (value > 0.5f && Sellection.Current.right)
         {
             Sellection.SellectButton(Sellection.Current.OnRight());

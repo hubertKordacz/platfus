@@ -41,21 +41,15 @@ public class MainMenu : MonoBehaviour
         for (int i = 0; i < players.playerCount; i++)
         {
             if (players.GetPlayer(i).GetButtonDown(PlayerInput.InputActions.Attack.ToString()))
-            {
-                _current.OnConfirm(i);
-            }
-
-            //todo cancel
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                _current.OnCancel(i);
-            }
+                _current.OnConfirm(i + 1);
+            if (players.GetPlayer(i).GetButtonDown(PlayerInput.InputActions.Cancel.ToString()))
+                _current.OnCancel(i  + 1);    
 
             if (Sellection.Current == null) return;
 
-            if (_current.Vertical(i, players.GetPlayer(i).GetAxisRaw(PlayerInput.InputActions.Vertical.ToString())))
+            if (_current.Vertical(i + 1, players.GetPlayer(i).GetAxisRaw(PlayerInput.InputActions.Vertical.ToString())))
                 StartCoroutine(BlockInput());
-            if (_current.Horizontal(i, players.GetPlayer(i).GetAxisRaw(PlayerInput.InputActions.Horizontal.ToString())))
+            if (_current.Horizontal(i + 1, players.GetPlayer(i).GetAxisRaw(PlayerInput.InputActions.Horizontal.ToString())))
                 StartCoroutine(BlockInput());
         }
     }

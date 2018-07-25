@@ -20,7 +20,7 @@ public class MenuButton : MonoBehaviour
         if (target) target.sprite = highlight;
     }
 
-    public void OnDiselect()
+    public void OnDeselect()
     {
         if (target) target.sprite = normal;
     }
@@ -59,7 +59,7 @@ public static class Sellection
 
     public static void SellectButton(MenuButton button)
     {
-        if (_current) _current.OnDiselect();
+        if (_current) _current.OnDeselect();
         _current = button;
         if (_current) _current.OnSellect();
     }

@@ -8,64 +8,52 @@ public class PlayerInput : MonoBehaviour
     public SkinnedMeshRenderer _skinnedMesh;
     public Material[] _materials;
 
+    int _scoreID;
+
     public enum PlayerId
     {
-        player1 = 0,
-        player2 = 1,
-        player3 = 2,
-        player4 = 3,
-        player5 = 4
+        none = 0,
+        pad_1 = 1,
+        pad_2 = 2,
+        pad_3 = 3,
+        pad_4 = 4,
+        keyboard_1 = 5,
+        keyboard_2 = 6,
+        test = 7
     }
     public enum InputActions
     {
         Vertical = 0,
         Horizontal = 1,
-        Attack = 2
+        Attack = 2,
+        Cancel = 3,
+        Menu = 4
     }
 
-    public PlayerId playerId = PlayerId.player1;
+    public PlayerId playerId = PlayerId.none;
 
-    // Use this for initialization
-    void Start()
+    public void InitializePlayer(int index)
     {
-        if (CharacterPanel.players == null)
-        {
-            _skinnedMesh.material = _materials[(int)playerId];
-        }
-        else
-        {
-            for (int i = 0; i < CharacterPanel.players.Count; i++)
-            {
-                if (CharacterPanel.players[i] == playerId)
-                {
-                    _skinnedMesh.material = _materials[i];
-                    return;
-                }
-            }
-            gameObject.SetActive(false);
-        }
+        _skinnedMesh.material = _materials[index];
+        _scoreID = index;
     }
 
     private void OnDestroy()
     {
-        
+
     }
 
     public void SetPoints()
     {
-        if (ScoreManager.Instance) ScoreManager.Instance.SetPoints((int)playerId);
+        //if (ScoreManager.Instance) ScoreManager.Instance.SetPoints((int)playerId);
+        if (ScoreManager.Instance) ScoreManager.Instance.SetPoints(_scoreID);
     }
 
-    // Update is called once per frame
-    //void Update () {
-
-    //Debug.Log("P " + this.playerId + " " +(int)playerId + " "+ rewiredPlayer.name  + " "+ GetAxis(InputActions.Horizontal));
-    //}
     private Player rewiredPlayer
     {
         get
         {
-            return ReInput.players.GetPlayer((int)playerId);
+            return ReInput.players.GetPlayer((int)playerId - 1);
         }
     }
     public bool GetButtonDown(InputActions input)
@@ -75,13 +63,11 @@ public class PlayerInput : MonoBehaviour
 
     public bool GetButtonUp(InputActions input)
     {
-
         return rewiredPlayer.GetButtonUp(input.ToString());
     }
 
     public bool GetButton(InputActions input)
     {
-
         return rewiredPlayer.GetButton(input.ToString());
     }
 

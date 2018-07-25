@@ -6,8 +6,6 @@ public class MainPanel : MenuPanel
 {
     public override void OnConfirm(int player)
     {
-        if (player > 0) return;
-
         if (Sellection.Current == buttons[0]) ShowCharacterSelect();
         else QuitGame();
     }

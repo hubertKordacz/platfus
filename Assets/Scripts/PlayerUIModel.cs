@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUIModel : MonoBehaviour
 {
-    public PlayerInput.PlayerId playerId = PlayerInput.PlayerId.player1;
+    public PlayerInput.PlayerId playerId = PlayerInput.PlayerId.pad_1;
     public SkinnedMeshRenderer _skinnedMesh;
     public Material[] _materials;
 
@@ -13,26 +13,15 @@ public class PlayerUIModel : MonoBehaviour
 
     void Start()
     {
-        if (CharacterPanel.players == null)
+        if (CharacterPanel.activePlayers != null && CharacterPanel.activePlayers[transform.GetSiblingIndex()] == PlayerInput.PlayerId.none)
         {
-            _skinnedMesh.material = _materials[(int)playerId];
-        }
-        else
-        {
-            for (int i = 0; i < CharacterPanel.players.Count; i++)
-            {
-                if (CharacterPanel.players[i] == playerId)
-                {
-                    _skinnedMesh.material = _materials[i];
-                    score.gameObject.SetActive(true);
-                    score.text = ScoreManager.GetPoints((int)playerId).ToString();
-                    return;
-                }
-            }
-
             gameObject.SetActive(false);
             score.gameObject.SetActive(false);
+            return;
         }
-    }
 
+        _skinnedMesh.material = _materials[transform.GetSiblingIndex()];
+        score.gameObject.SetActive(true);
+        score.text = ScoreManager.GetPoints(transform.GetSiblingIndex()).ToString();      
+    }
 }
