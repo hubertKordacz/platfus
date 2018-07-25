@@ -38,11 +38,10 @@ public class MainMenu : MonoBehaviour
 
         var players = ReInput.players;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < players.playerCount; i++)
         {
             if (players.GetPlayer(i).GetButtonDown(PlayerInput.InputActions.Attack.ToString()))
             {
-                Debug.Log(i);
                 _current.OnConfirm(i);
             }
 

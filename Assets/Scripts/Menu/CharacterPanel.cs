@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CharacterPanel : MenuPanel
 {
+    //public class Player
+    //{
+    //    public PlayerInput.PlayerId player;
+    //    public Image join, ready;
+    //}
+
     public static List<PlayerInput.PlayerId> players;
 
     public Image[] join, ready;
@@ -39,14 +46,11 @@ public class CharacterPanel : MenuPanel
     {
         if (!_waitForFade)
         {
-            if (player == 0)
+            if (AllReady())
             {
-                if (AllReady())
-                {
-                    _waitForFade = true;
-                    ScoreManager.ResetGame();
-                    return;
-                }
+                _waitForFade = true;
+                ScoreManager.ResetGame();
+                return;
             }
 
             if (!players.Contains((PlayerInput.PlayerId)player))
@@ -76,7 +80,7 @@ public class CharacterPanel : MenuPanel
 
     public override void OnCancel(int player)
     {
-        if (player == 0 && !_ready[0])
+        if (!_ready[player])
         {
             MainMenu.Instance.ShowPannel(MainMenu.Menu.main);
             return;
